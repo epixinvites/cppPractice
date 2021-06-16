@@ -20,4 +20,5 @@ Date::Date(int y, int m, int d):y{y},m{m},d{d}{}
 
 int main(){
     Date d {1970,1,1};
+    const Date dd {1970,1,1};
 }
