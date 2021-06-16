@@ -16,6 +16,13 @@ enum class Month{
 };
 
 Month operator++(Month &m){
-    m = (m==Month::dec)?Month::jan:Month(int(m)+1); // 
+    m = (m==Month::dec) ? Month::jan : Month(int(m)+1); // m becomes Month::jan if (m==Month::dec) and Month(int(m)+1) otherwise 
     return m;
+}
+
+
+
+int main(){
+    Month m = Month::dec;
+    ++m; // m becomes Month::jan
 }
