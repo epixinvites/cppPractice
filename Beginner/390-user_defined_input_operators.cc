@@ -9,10 +9,12 @@ istream &operator>>(istream &is, Date &dd){
     char c1, c2;
     is>>y>>c1>>m>>c2>>d;
     if(!is){
+        throw runtime_error("Bad input stream");
         return is;
     }
     if(c1!=','||c2!=','){
         is.clear(ios_base::failbit);
+        throw runtime_error("Invalid input format");
         return is;
     }
     dd = Date {y,m,d};
@@ -21,5 +23,6 @@ istream &operator>>(istream &is, Date &dd){
 
 int main(){
     Date d;
+    cout<<"Input date in format yyyy,mm,dd: ";
     cin>>d;
 }
