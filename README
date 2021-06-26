@@ -1,3 +1,5 @@
 This repository will contain practices and examples of the C++ books I've studied.
 
+All the executables here were compiled using these flags "g++ -g -std=c++17 -Wall -Wextra -o %filename.cc %filename"
+
 This is only for reference!
