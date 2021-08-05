@@ -7,4 +7,5 @@ int main(){
     p[2] = 3.3;
     double x = *p; // read the 1st object for p; same as p[0]
     double y = p[2]; // read the 3rd object for p
+    
 }

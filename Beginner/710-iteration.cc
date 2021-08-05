@@ -1,6 +1,7 @@
 #include <list>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 class Text_iterator{
     std::list<std::vector<char>>::iterator ln;
     std::vector<char>::iterator pos;
@@ -49,4 +50,13 @@ void erase_line(Document &d, int n){
 }
 template<typename Iter> void advance(Iter &p, int n){
     while(0<n){++p; --n;}
+}
+Text_iterator find_txt(Text_iterator first, Text_iterator last, const std::string &s){
+    if(s.size()==0) return last;
+    char first_char=s[0];
+    while(true){
+	auto p = std::find(first,last,first_char);
+	if(p==last||match(p,last,s)) return p;
+	first = ++p;
+    }
 }
