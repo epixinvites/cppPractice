@@ -14,14 +14,13 @@ public:
     void reserve(int newalloc);
     void resize(int newsize, T def=T());
     int capacity() const { return space;}
-    void push_back(int d);
+    void push_back(T d);
     vector &operator=(const vector &a);
     T *begin(){return elem;};
     const T *begin() const{return elem;};
     T *end(){return elem+sz;};
     const T *end() const{return elem+sz;};
     unsigned long size();
-
     T *insert(T *p, const T &val);
     T *erase(T *p);
 };
@@ -47,7 +46,7 @@ template<typename T>void vector<T>::resize(int newsize, T def){
     for(int i = sz; i<newsize; i++) elem[i]=0;
     sz=newsize;
 }
-template<typename T>void vector<T>::push_back(int d){
+template<typename T>void vector<T>::push_back(T d){
     if(space==0) reserve(8);
     else if (sz==space) reserve(2*space);
     elem[sz]=d;
