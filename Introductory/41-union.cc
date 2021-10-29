@@ -14,7 +14,7 @@ struct Entry{
 };
 void f(Entry *pe){
     if(pe->t==num){
-	std::cout<<pe->v.i;
+        std::cout<<pe->v.i;
     }
 }
 void fv(Entry *pe){
