@@ -25,3 +25,11 @@ public:
 
     complex &operator/=(complex);
 };
+
+int main(){
+    complex z = {1,0};
+    const complex cz {1,3};
+    z=cz;
+    // cz=z; not ok, cz is a const
+    double x=z.real();
+}
