@@ -5,3 +5,4 @@ link_directories(libs/)
 include_directories(include/)
 
 add_subdirectory(Chapter_3_SFML_Subproject)
+add_subdirectory(Chapter_4_SFML_Game_Creation)
