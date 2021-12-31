@@ -16,15 +16,15 @@ class Hero{
 	const float gravity = 9.8;
 	bool isOnGround = false;
 public:
-	Hero(const std::string &filename, sf::Vector2f position, float mass);
+	Hero(const std::string &filename, const sf::Vector2f& position, float mass);
 	void update(float delta, const sf::Vector2f& viewSize);
-	void jump(float velocity);
+	void jump(float _velocity);
 
 
 	sf::Vector2f& getPosition();
 	bool& getIsMoving();
+	bool& getIsOnGround();
 	sf::Sprite& getSprite();
 	sf::Texture& getTexture();
 	void draw(sf::RenderWindow& window);
 };
-
