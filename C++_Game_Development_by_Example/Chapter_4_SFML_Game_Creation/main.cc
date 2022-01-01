@@ -3,30 +3,10 @@
 #include <vector>
 #include <algorithm>
 
+#include "base.h"
 #include "hero.h"
 #include "enemy.h"
-
-class LoadedObject{
-	sf::Texture texture;
-	sf::Sprite sprite;
-public:
-	explicit LoadedObject(const std::string& filename){
-		texture.loadFromFile(filename);
-		sprite.setTexture(texture);
-	}
-
-	sf::Sprite& getSprite(){
-		return sprite;
-	}
-
-	sf::Texture& getTexture(){
-		return texture;
-	}
-
-	void draw(sf::RenderWindow& window){
-		window.draw(sprite);
-	}
-};
+#include "rocket.h"
 
 void processInput(sf::RenderWindow& window, Hero& hero){
 	sf::Event event{};
@@ -48,9 +28,8 @@ void update(float delta, Hero& hero, const sf::Vector2f& viewSize, std::vector<E
 	curTime+=delta;
 	if(curTime>=(prevTime+1.125)){
 		prevTime=curTime;
-		Enemy* newEnemy = new Enemy{"res/enemy.png", viewSize};
+		auto* newEnemy = new Enemy{"res/enemy.png", viewSize};
 		enemies.push_back(newEnemy);
-		// delete newEnemy;
 	}
 	if(!enemies.empty()){
 		for(auto& i:enemies){
@@ -77,25 +56,22 @@ int main(){
 
 	float curTime = 0, prevTime = 0;
 
-	LoadedObject sky{"res/sky.png"}, setting{"res/bg.png"};
+	BaseObject sky{"res/sky.png"}, setting{"res/bg.png"};
 	Hero hero{"res/hero.png", sf::Vector2f{static_cast<float>(viewSize.x*0.25), static_cast<float>(viewSize.y*0.5)}, 200};
 	std::vector<Enemy*> enemies;
-
-	Enemy test_enemy{"res/enemy.png", viewSize};
+	std::vector<Rocket*> rockets;
 
 	while(window.isOpen()){
 		processInput(window, hero);
 
 		sf::Time delta = clock.restart();
 		update(delta.asSeconds(), hero, viewSize, enemies, curTime, prevTime);
-		test_enemy.update(delta.asSeconds());
 
 		window.clear();
 
 		sky.draw(window);
 		setting.draw(window);
 		hero.draw(window);
-		test_enemy.draw(window);
 
 		std::for_each(enemies.begin(), enemies.end(), [&window](Enemy* i){i->draw(window);});
 

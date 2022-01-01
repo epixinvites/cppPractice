@@ -2,13 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#include "base.h"
 
-class Hero{
-	sf::Vector2f position;
-
-	sf::Texture texture;
-	sf::Sprite sprite;
-
+class Hero : public BaseObject{
 	bool isMoving = false;
 	int jumpCount = 0;
 	float mass = 0;
@@ -20,11 +16,6 @@ public:
 	void update(float delta, const sf::Vector2f& viewSize);
 	void jump(float _velocity);
 
-
-	sf::Vector2f& getPosition();
 	bool& getIsMoving();
 	bool& getIsOnGround();
-	sf::Sprite& getSprite();
-	sf::Texture& getTexture();
-	void draw(sf::RenderWindow& window);
 };
