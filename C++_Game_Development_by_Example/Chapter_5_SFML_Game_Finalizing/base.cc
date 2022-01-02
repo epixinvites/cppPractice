@@ -44,3 +44,42 @@ const sf::Texture& BaseObject::getTexture() const{
 const sf::Sprite& BaseObject::getSprite() const{
 	return sprite;
 }
+
+BaseFont::BaseFont(const std::string& filename){
+	if(!font.loadFromFile(filename)){
+		throw std::runtime_error{"Error loading font"};
+	}
+}
+
+sf::Font& BaseFont::getFont(){
+	return font;
+}
+
+const sf::Font& BaseFont::getFont() const{
+	return font;
+};
+
+BaseText::BaseText(sf::Font& font, const sf::String& textText, unsigned int textSize, const sf::Color& textColor, const sf::Vector2f& textPosition){
+	text.setFont(font);
+	text.setString(textText);
+	text.setCharacterSize(textSize);
+	text.setFillColor(textColor);
+	text.setOrigin(sf::Vector2f{text.getLocalBounds().width/2, text.getLocalBounds().height/2});
+	text.setPosition(textPosition);
+}
+
+void BaseText::draw(sf::RenderWindow& window){
+	window.draw(text);
+}
+
+void BaseText::setText(const sf::String& alteredText){
+	text.setString(alteredText);
+}
+
+sf::Text& BaseText::getText(){
+	return text;
+}
+
+const sf::Text& BaseText::getText() const{
+	return text;
+}

@@ -6,3 +6,4 @@ include_directories(include/)
 
 add_subdirectory(Chapter_3_SFML_Subproject)
 add_subdirectory(Chapter_4_SFML_Game_Creation)
+add_subdirectory(Chapter_5_SFML_Game_Finalizing)
