@@ -130,7 +130,8 @@ int main(){
 	BaseFont snackerComicFont{"res/SnackerComic.ttf"}, arialFont{"res/arial.ttf"};
 	BaseText headingText{snackerComicFont.getFont(), "Tiny Bazooka", 84, sf::Color::Red, sf::Vector2f{static_cast<float>(viewSize.x*0.5), static_cast<float>(viewSize.y*0.1)}};
 	BaseText scoreText{arialFont.getFont(), "Score: 0", 45, sf::Color::Red, sf::Vector2f{static_cast<float>(viewSize.x*0.5), static_cast<float>(viewSize.y*0.1)}};
-	Hero hero{"res/hero.png", sf::Vector2f{static_cast<float>(viewSize.x*0.25), static_cast<float>(viewSize.y*0.5)}, 200};
+	BaseText tutorialText{arialFont.getFont(), "Press 'S' to re/start the game and shoot rockets, Up arrow to jump, Escape to quit", 23, sf::Color::Red, sf::Vector2f{static_cast<float>(viewSize.x*0.5), static_cast<float>(viewSize.y*0.25)}};
+	Hero hero{"res/heroAnim.png", sf::Vector2f{static_cast<float>(viewSize.x*0.25), static_cast<float>(viewSize.y*0.5)}, 200, 4, 1};
 
 	while(window.isOpen()){
 		window.clear();
@@ -146,8 +147,13 @@ int main(){
 		setting.draw(window);
 		hero.draw(window);
 
-		if(gameData.isGameOver){
+		if(gameData.isGameOver||gameData.curTime<5){
 			headingText.draw(window);
+			tutorialText.draw(window);
+		}
+		else{
+			scoreText.setText("Score: "+std::to_string(gameData.score));
+			scoreText.draw(window);
 		}
 
 		std::for_each(gameData.enemies.begin(), gameData.enemies.end(), [&window](Enemy* i){i->draw(window);});

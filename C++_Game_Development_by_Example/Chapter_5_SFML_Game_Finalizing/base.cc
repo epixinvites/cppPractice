@@ -74,6 +74,7 @@ void BaseText::draw(sf::RenderWindow& window){
 
 void BaseText::setText(const sf::String& alteredText){
 	text.setString(alteredText);
+	text.setOrigin(sf::Vector2f{text.getLocalBounds().width/2, text.getLocalBounds().height/2});
 }
 
 sf::Text& BaseText::getText(){
