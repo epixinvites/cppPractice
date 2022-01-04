@@ -4,6 +4,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 
-add_executable(chapter6_main main.cc)
+add_executable(chapter6_main main.cc mesh.cc)
 
 target_link_libraries(chapter6_main -lglfw -lGLEW -lGL -lm -lX11 -lpthread -lXi -lXrandr -ldl)
