@@ -9,7 +9,7 @@ struct ObjectVertex{
 	glm::vec3 pos, normal, color;
 	glm::vec2 texCoordinates;
 
-	ObjectVertex(glm::vec3& pos, glm::vec3& normal, glm::vec3& color, glm::vec2& texCoordinates);
+	ObjectVertex(glm::vec3 pos, glm::vec3 normal, glm::vec3 color, glm::vec2 texCoordinates);
 };
 
 class MeshObject{
