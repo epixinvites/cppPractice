@@ -1,6 +1,7 @@
 #include "shaderLoader.h"
 #include <fstream>
 #include <vector>
+#include <string>
 
 std::string shaderLoader::readShader(const std::string& filename){
 	std::string shaderCode;
@@ -27,6 +28,30 @@ GLuint shaderLoader::createShader(GLenum shaderType, std::string& source, const 
 	if(compileResult == GL_FALSE){
 		int errorLogLength = 0;
 		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &errorLogLength);
-		std::vector<char> shaderLog
+		std::vector<char> shaderLog(errorLogLength);
+		glGetShaderInfoLog(shader, errorLogLength, nullptr, &shaderLog[0]);
+		std::string errorMessage = "Error compiling shader "+shaderName+"\n"+&shaderLog[0]+"\n";
+		throw std::runtime_error{errorMessage};
 	}
+	return shader;
+}
+
+GLuint shaderLoader::createProgram(const std::string& vertexShaderFilename, const std::string& fragmentShaderFilename){
+	std::string vertexShaderCode=readShader(vertexShaderFilename), fragmentShaderCode=readShader(fragmentShaderFilename);
+	GLuint vertexShader=createShader(GL_VERTEX_SHADER, vertexShaderCode, "Vertex shader"), fragmentShader=createShader(GL_FRAGMENT_SHADER, fragmentShaderCode, "Fragment shader");
+	int linkResult{0};
+	GLuint program=glCreateProgram();
+	glAttachShader(program, vertexShader);
+	glAttachShader(program, fragmentShader);
+	glLinkProgram(program);
+	glGetProgramiv(program, GL_LINK_STATUS, &linkResult);
+	if(linkResult==GL_FALSE){
+		int errorLogLength{0};
+		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &errorLogLength);
+		std::vector<char> programLog(errorLogLength);
+		glGetProgramInfoLog(program, errorLogLength, nullptr, &programLog[0]);
+		std::string errorMessage = "Shader link failed\n"+&program[0];
+		throw std::runtime_error{errorMessage};
+	}
+	return program;
 }
