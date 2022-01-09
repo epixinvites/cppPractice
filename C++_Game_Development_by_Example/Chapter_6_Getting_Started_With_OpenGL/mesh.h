@@ -14,8 +14,8 @@ struct ObjectVertex{
 
 class MeshObject{
 public:
-	void setTriData(std::vector<ObjectVertex>& vertices, std::vector<unsigned int>& indices);
-	void setQuadData(std::vector<ObjectVertex>& vertices, std::vector<unsigned int>& indices);
-	void setCubeData(std::vector<ObjectVertex>& vertices, std::vector<unsigned int>& indices);
-	void setSphereData(std::vector<ObjectVertex>& vertices, std::vector<unsigned int>& indices);
+	static void setTriData(std::vector<ObjectVertex>& vertices, std::vector<unsigned int>& indices);
+	static void setQuadData(std::vector<ObjectVertex>& vertices, std::vector<unsigned int>& indices);
+	static void setCubeData(std::vector<ObjectVertex>& vertices, std::vector<unsigned int>& indices);
+	static void setSphereData(std::vector<ObjectVertex>& vertices, std::vector<unsigned int>& indices);
 };

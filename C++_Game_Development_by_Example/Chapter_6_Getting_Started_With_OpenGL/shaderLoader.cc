@@ -50,7 +50,7 @@ GLuint shaderLoader::createProgram(const std::string& vertexShaderFilename, cons
 		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &errorLogLength);
 		std::vector<char> programLog(errorLogLength);
 		glGetProgramInfoLog(program, errorLogLength, nullptr, &programLog[0]);
-		std::string errorMessage = "Shader link failed\n"+&program[0];
+		std::string errorMessage="Shader link failed\n";errorMessage+=&programLog[0];
 		throw std::runtime_error{errorMessage};
 	}
 	return program;
