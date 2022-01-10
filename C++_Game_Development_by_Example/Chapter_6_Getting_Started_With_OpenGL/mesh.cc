@@ -125,7 +125,36 @@ void MeshObject::setSphereData(std::vector<ObjectVertex>& vertices, std::vector<
 	vertices.clear(), indices.clear();
 	float latitudeBands=20, longitudeBands=20, radius=1;
 	for(float latitudeNumber=0; latitudeNumber<=latitudeBands; latitudeNumber++){
-		float theta = latitudeNumber*3.1415/latitudeBands;
-		float sinTheta = std::sin(theta);
+		float theta = latitudeNumber*3.14/latitudeBands;
+		float sinTheta = std::sin(theta), cosTheta = std::cos(theta);
+		for(float longitudeNumber=0; longitudeNumber<=longitudeBands; longitudeNumber++){
+			float phi = longitudeNumber*2*3.147*longitudeBands;
+			float sinPhi = std::sin(phi), cosPhi = std::cos(phi);
+			glm::vec2 texCoordinates; glm::vec3 normal, color, position;
+			texCoordinates.x=longitudeNumber/longitudeBands;
+			texCoordinates.y=latitudeNumber/latitudeBands;
+			normal.x=cosPhi*sinTheta;
+			normal.y=cosTheta;
+			normal.z=sinPhi*sinTheta;
+			color.r=normal.x;
+			color.g=normal.y;
+			color.b=normal.z;
+			position.x=radius*normal.x;
+			position.y=radius*normal.y;
+			position.z=radius*normal.z;
+			ObjectVertex vertex{position, normal, color, texCoordinates};
+			vertices.push_back(vertex);
+		}
+	}
+	for(unsigned int latitudeNumber=0; latitudeNumber<latitudeBands; latitudeNumber++){
+		for(unsigned int longitudeNumber=0; longitudeNumber<longitudeBands; longitudeNumber++){
+			unsigned int first=(latitudeNumber*(longitudeBands+1))+longitudeNumber, second=first+longitudeBands;
+			indices.push_back(first);
+			indices.push_back(second);
+			indices.push_back(first+1);
+			indices.push_back(second);
+			indices.push_back(second+1);
+			indices.push_back(first+1);
+		}
 	}
 }
