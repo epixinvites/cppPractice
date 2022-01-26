@@ -30,5 +30,15 @@ lightRenderer::lightRenderer(MeshType meshType, CameraObject* camera){
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*indices.size(), &indices[0], GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+}
 
+void lightRenderer::draw(){
+	glm::mat4 model = glm::mat4(1);
+	model = glm::translate(glm::mat4(1), position);
+	glUseProgram(this->program);
+	GLint modelLoc = glGetUniformLocation(this->program, "model");
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+	glm::mat4 view = camera->getViewMatrix();
+	GLint vLoc = glGetUniformLocation(this->program, "view");
+	glUniformMatrix4fv(vLoc, 1, GL_FALSE, glm::value_ptr(view));
 }
