@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(C++_Game_Development_by_Example)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Wredundant-decls -Wundef -Wno-unused")
 
 link_directories(libs/)
 include_directories(include/)

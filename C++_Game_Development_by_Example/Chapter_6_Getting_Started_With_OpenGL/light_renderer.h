@@ -5,18 +5,18 @@
 #include "shaderLoader.h"
 #include "camera.h"
 
-class lightRenderer{
+class LightRenderer{
 	CameraObject* camera;
 	std::vector<ObjectVertex> vertices;
 	std::vector<GLuint> indices;
 	glm::vec3 position, color;
-	GLuint VBO, EBO, VAO, program;
+	GLuint vbo = 0, ebo = 0, vao = 0, program = 0;
 public:
-	lightRenderer(MeshType meshType, CameraObject* camera);
+	LightRenderer(MeshType meshType, CameraObject* camera);
 	void draw();
-	void setPosition(glm::vec3 _position);
-	void setColor(glm::vec3 _color);
-	void setProgram(GLuint _program);
+	void setPosition(const glm::vec3& position);
+	void setColor(const glm::vec3& color);
+	void setProgram(const GLuint& program);
 	glm::vec3 getPosition();
 	glm::vec3 getColor();
 };
