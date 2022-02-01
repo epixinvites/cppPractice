@@ -9,6 +9,8 @@
 		* [lvalues](#lvalues)
 		* [rvalues](#rvalues)
 		* [Initializing an object with another object](#initializing-an-object-with-another-object)
+	* [Declaring and defining](#declaring-and-defining)
+* [Deducing Types](#deducing-types)
 
 <!-- vim-markdown-toc -->
 
@@ -73,9 +75,11 @@ Well, copy, in C++, it can be differentiated into two types
 - Move constructed
 	- Copies of rvalues are usually move constructed
 	- `auto obj1 = std::move(obj2)` <- this calls the move constructor
+		- The data that obj2 pointed to is transfered to obj1. Obj2 is now a nullptr, while obj1 now points to the data obj2 originally pointed to. 
 - Copy constructed
 	- Copies of lvalues are usually copy constructed
 	- `auto obj1 = obj2` <- this calls the copy constructor
+		- obj1 allocates memory and copies obj2's data for itself. The content of obj1 and obj2 is the same, but the both of them point to different parts of the memory.
 
 ```cpp
 std::vector<int> obj1{1, 2, 3, 4, 5};
@@ -88,3 +92,23 @@ In the second line we declared obj2 and copied the elements of obj1 into it, now
 
 In the third line however, we *moved* obj2 to obj3, now obj3 has the elements of obj2 and obj2 is now a nullpointer.
 
+### Declaring and defining
+**Declarations** introduce names and types, without specifying any details or implementations.
+
+**Definitions** provide the storage locations or implementation details.
+
+```cpp
+extern int x; 				// object declaration
+class X;					// class declaration
+void f();					// function declaration
+
+int x;						// object definition
+class X{					// class definition
+	// code goes here...
+};
+void f(){					// function definition
+	// code goes here...
+}
+```
+
+## Deducing Types
