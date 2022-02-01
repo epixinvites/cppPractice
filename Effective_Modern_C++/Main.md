@@ -1,6 +1,6 @@
 # Effective Modern C++
 
-- Please note, this document is written based on my understanding of the book, I have added and left out bits of information. If you find any of the below factually or gramatically incorrect, please open an issue to correct them.
+- Please note, this document is written based on my understanding of the book, and I may have added and left out bits of information. If you find any of the below factually or gramatically incorrect, please open an issue to correct them.
 
 <!-- vim-markdown-toc GFM -->
 
