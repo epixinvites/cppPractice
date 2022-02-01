@@ -6,6 +6,7 @@
 	* [lvalues and rvalues](#lvalues-and-rvalues)
 		* [lvalues](#lvalues)
 		* [rvalues](#rvalues)
+		* [Initializing an object with another object](#initializing-an-object-with-another-object)
 
 <!-- vim-markdown-toc -->
 
@@ -62,4 +63,26 @@ int&& a = 10; 		// 4
 2. As stated above, temporary objects returned from functions are rvalues
 3. Temporary object X is a rvalue, therefore the member of `s` in struct `X` is also a rvalue
 4. Ok, here's something different. The 10 assigned to `a` here is no longer a rvalue, as int&& means a reference to a rvalue, hence the 10 here is now given an address where it can be referred to, which now makes it a lvalue.
+
+#### Initializing an object with another object
+When an object is initialized with another object of the same type, for example `int x = 123`, the new object is said to be a copy of the initializing object. 
+
+Well, copy, in C++, it can be differentiated into two types
+- Move constructed
+	- Copies of rvalues are usually move constructed
+	- `auto obj1 = std::move(obj2)` <- this calls the move constructor
+- Copy constructed
+	- Copies of lvalues are usually copy constructed
+	- `auto obj1 = obj2` <- this calls the copy constructor
+
+```cpp
+std::vector<int> obj1{1, 2, 3, 4, 5};
+auto obj2 = obj1; // this calls the copy constructor
+auto obj3 = std::move(obj2); // this calls the move constructor
+```
+In the first line we declared `obj1` with type `std::vector<int>` along with the elements `{1, 2, 3, 4, 5}`.
+
+In the second line we declared obj2 and copied the elements of obj1 into it, now obj2 is identical to obj1.
+
+In the third line however, we *moved* obj2 to obj3, now obj3 has the elements of obj2 and obj2 is now a nullpointer.
 
