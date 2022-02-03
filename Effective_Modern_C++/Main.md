@@ -10,7 +10,8 @@
 		* [rvalues](#rvalues)
 		* [Initializing an object with another object](#initializing-an-object-with-another-object)
 	* [Declaring and defining](#declaring-and-defining)
-* [Deducing Types](#deducing-types)
+* [Item 1: Understanding template type deduction](#item-1-understanding-template-type-deduction)
+	* [Function templates](#function-templates)
 
 <!-- vim-markdown-toc -->
 
@@ -111,4 +112,12 @@ void f(){					// function definition
 }
 ```
 
-## Deducing Types
+## Item 1: Understanding template type deduction
+### Function templates
+```cpp
+template <typename T> void f(const T& param);
+
+int x = 0;
+f(x);
+```
+Here we declared
